@@ -1,0 +1,55 @@
+package com.country.demo1;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+public class EmployeeController {
+	@Autowired
+	private EmployeeRepository empr;
+	@GetMapping("/empname") 
+	public List<String> getSample(){
+		ArrayList<String> transformedvalues=new ArrayList<String>();
+		for(EmployeeEntity emt:empr.findAll()) {
+			EmployeeEntity emp=new EmployeeEntity ();
+			//emp.setEmployee_name(emt.getEmployee_name());
+			transformedvalues.add(emp.getEmployee_name());
+		}
+		return transformedvalues;
+	}
+	
+	@GetMapping("/a") 
+	public List<EmployeeEntity> getSam(){
+		ArrayList<EmployeeEntity> nameavalues=new ArrayList<EmployeeEntity>();
+		for(EmployeeEntity emt:empr.findAll()) {
+			EmployeeEntity e=new EmployeeEntity ();
+			if(emt.getEmployee_name().startsWith("a")) {
+			e.setEmployee_name(emt.getEmployee_name());
+			
+			nameavalues.add(e);
+		}
+		}                                                                                                                                                                                                                                                                                                                               
+		return nameavalues;
+	}
+	
+		
+		@GetMapping("/empid") 
+		public ArrayList<Integer> getSmpl(){
+			ArrayList<Integer> idreturn=new ArrayList<Integer>();
+			for(EmployeeEntity emt:empr.findAll()) {
+				idreturn.add(emt.getId());
+				}
+			return  idreturn;
+			
+			@GetMapping("/dep") 
+			public ArrayList<String> getSmpll(){
+				ArrayList<String> dept=new ArrayList<String>();
+				for(EmployeeEntity emt:empr.findAll()) {
+					dept.add(emt.getId());
+					}
+				return dept;
+	}
+
+}
