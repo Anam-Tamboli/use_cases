@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,5 +34,24 @@ public List<ClientEntity> client4(){
 @GetMapping("/c5")
 public List<ClientEntity> client5(){
 	return cr.getdetail(5);
+}
+@GetMapping("/clients/{tenure}/{premium}")
+public int discount(@PathVariable String tenure, @PathVariable int premium)
+{
+	if(tenure.equals("greaterthan5")) {
+	int d=(premium*12)/100;
+	premium=premium-d;
+	return premium;
+}
+	if(tenure.equals("equalto5")) {
+		int d=(premium*10)/100;
+		premium=premium-d;
+		return premium;
+	}
+	else if(tenure.equals("lessthan5")) {
+		return premium;
+	}
+	return 0;
+	
 }
 }
